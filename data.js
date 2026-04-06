@@ -10,7 +10,7 @@ const _TENEXAR_DATA = {
         "MzBST05BTldPR0FOVEVORVhBUkVJR0hUQk9STjIx", 
         "L1RFTkVYQVIv",                             
         "SU5BQ0NFU1NJQkxFSVNMQU5E",                 
-        "QsSwT05HMzM3",                             
+        "QklPTkczMzc=", // Türkçe İ karakteri fixlendi [cite: 2026-04-05]
         "QlVSREFZSU0="                              
     ]
 };
