@@ -57,6 +57,7 @@
 
     nextBtn.addEventListener('click', () => { _idx++; localStorage.setItem('_tx_l', _idx); _sync(); });
     document.getElementById('back-btn').onclick = () => { if(_idx > 0) { _idx--; localStorage.setItem('_tx_l', _idx); _sync(); } };
+    document.getElementById('p-download').onclick = () => { window.open('tnxr.wav', '_blank'); };
 
     function _loop() {
         if(_tmr) clearInterval(_tmr);
@@ -90,12 +91,12 @@
         let totalTime = document.getElementById('clock').innerText;
         _sendScore(totalTime);
         document.querySelector('.container').innerHTML = `<div style="height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; background:var(--surface);">
-            <h1 style="letter-spacing:10px;">DEVAM EDECEK</h1>
-            <div style="font-size:3.5rem; color:var(--accent); margin:20px 0;">${totalTime}</div>
+            <h1 style="letter-spacing:10px; color:#fff;">DEVAM EDECEK</h1>
+            <div style="font-size:3rem; color:var(--accent); margin:20px 0;">${totalTime}</div>
             <button onclick="localStorage.clear();location.reload();" class="btn-rect" style="background:var(--accent); color:white; padding:15px 40px; border:none; cursor:pointer; font-family:var(--mono);">BAŞA DÖN</button>
         </div>`;
     }
 
     _sync();
-    window.addEventListener('click', () => { if(bgMusic.paused) { bgMusic.volume = 0.2; bgMusic.play(); } }, { once: true });
+    window.addEventListener('click', () => { if(bgMusic.paused) { bgMusic.volume = 0.15; bgMusic.play(); } }, { once: true });
 })();
