@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>TENEXAR</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="fog-effect"></div>
+    <div class="container">
+        <div class="game-panel">
+            <div class="header">
+                <div id="level-title">00.01</div>
+                <div id="clock">00:00.00</div>
+            </div>
+            <div class="mistake-bar">
+                <span class="mistake-label">HATA</span>
+                <div class="mistake-dots" id="mistake-dots">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+            </div>
+            <div id="puzzle-box">
+                <div class="puzzle-wrapper">
+                    <img id="puzzle-img" src="" alt="Tenexar Puzzle">
+                    <div id="audio-controls">
+                        <button id="p-download">SES DOSYASINI İNDİR</button>
+                    </div>
+                </div>
+                <div class="input-area">
+                    <input type="text" id="answer-input" placeholder="_ _ _ _ _" autocomplete="off" spellcheck="false">
+                    <button id="check-btn">GÖNDER</button>
+                    <button id="next-btn" style="display:none;">SONRAKİ ODA →</button>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <button id="back-btn">← GERİ GİT</button>
+        </div>
+    </div>
+    <audio id="bg-music" loop preload="auto">
+        <source src="bg-music.mp3" type="audio/mpeg">
+    </audio>
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
