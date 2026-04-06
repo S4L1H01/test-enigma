@@ -1,13 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
 
 :root {
-    --bg: #000000;
+    --bg: #030303;
     --surface: #0a0a0a;
     --border: #1a1a1a;
     --border-bright: #2a2a2a;
     --text: #c8c8c8;
     --text-dim: #444;
-    --accent: #8b0000; /* İstenen koyu kırmızı tonu [cite: 2026-04-05] */
+    --accent: #660000; /* İstediğin o çok koyu, ağır kırmızı */
     --green: #00e676;
     --mono: 'Share Tech Mono', monospace;
 }
@@ -17,8 +17,8 @@
 html, body {
     background: var(--bg);
     color: var(--text);
-    height: 100%;
-    width: 100%;
+    height: 100vh;
+    width: 100vw;
     overflow: hidden;
     font-family: var(--mono);
 }
@@ -27,105 +27,84 @@ html, body {
     position: fixed; inset: 0; pointer-events: none;
     opacity: 0; transition: opacity 0.6s ease; z-index: 50;
 }
-.fog-red   { background: radial-gradient(circle, rgba(139,0,0,0.2) 0%, transparent 70%); }
+.fog-red   { background: radial-gradient(circle, rgba(102,0,0,0.3) 0%, transparent 70%); }
 .fog-green { background: radial-gradient(circle, rgba(0,230,118,0.15) 0%, transparent 70%); }
 
-/* — LAYOUT (Ana Konteyner) — */
+/* — ANA YAPI — */
 .container {
-    position: fixed; inset: 0;
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    padding: 0; /* PC'de tam ekran için padding sıfır [cite: 2026-04-05] */
-    z-index: 5;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
-.game-panel {
-    width: 100%;
-    height: 100%; /* PC'de tam ekran yüksekliği [cite: 2026-04-05] */
-    display: flex; flex-direction: column;
-    max-width: none; /* Kısıtlamayı kaldırdık [cite: 2026-04-05] */
-}
-
-/* — HEADER — */
 .header {
+    height: 60px;
     display: flex; justify-content: space-between; align-items: center;
-    padding: 15px 20px; background: rgba(10, 10, 10, 0.8);
+    padding: 0 25px; background: var(--surface);
     border-bottom: 1px solid var(--border);
-    position: absolute; top: 0; left: 0; width: 100%; z-index: 10;
+    flex-shrink: 0;
 }
 #level-title { font-size: 0.8rem; color: var(--text-dim); letter-spacing: 0.2em; }
 #clock       { font-size: 1.2rem; color: var(--accent); letter-spacing: 0.1em; font-weight: bold; }
 
-/* — PUZZLE (PC'de Devasa Görsel) — */
+/* — PUZZLE ALANI (Asla karışıklık çıkarmaz) — */
 .puzzle-wrapper {
-    flex: 1; /* Kalan tüm alanı kapla [cite: 2026-04-05] */
+    flex: 1; 
     display: flex; justify-content: center; align-items: center;
-    background: #000; overflow: hidden;
-    padding-top: 60px; /* Header yüksekliği kadar boşluk [cite: 2026-04-05] */
-    padding-bottom: 140px; /* Input alanı için boşluk [cite: 2026-04-05] */
+    background: #000;
+    overflow: hidden;
+    position: relative;
+    padding: 20px;
 }
 
 #puzzle-img {
     max-width: 100%;
     max-height: 100%;
-    width: auto; height: auto;
-    object-fit: contain; /* Bozulmadan sığdır [cite: 2026-04-05] */
-    display: block;
+    object-fit: contain; /* Görseli bozmaz ve sığdırır */
 }
 
-/* — SES İNDİRME — */
 #audio-controls {
-    display: none; position: absolute; bottom: 150px; left: 50%;
-    transform: translateX(-50%); z-index: 11;
+    position: absolute; bottom: 20px; left: 50%;
+    transform: translateX(-50%); display: none;
 }
 #p-download {
-    padding: 10px 20px; background: var(--surface);
+    padding: 12px 25px; background: var(--surface);
     border: 1px solid var(--border-bright); color: var(--text-dim);
     font-family: var(--mono); font-size: 0.7rem; cursor: pointer;
 }
-#p-download:hover { border-color: var(--text); color: var(--text); }
 
-/* — INPUT AREA (Alt Panel) — */
+/* — CEVAP ALANI (Altta sabit kalır) — */
 .input-area {
-    position: absolute; bottom: 0; left: 0; width: 100%;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    flex-shrink: 0;
     display: flex; flex-direction: column;
-    background: rgba(10, 10, 10, 0.9);
-    border-top: 1px solid var(--border); z-index: 10;
 }
+
 #answer-input {
     width: 100%; background: transparent; border: none;
     border-bottom: 1px solid var(--border); color: var(--text);
-    padding: 20px; text-align: center; font-size: 1.2rem;
-    font-family: var(--mono); outline: none; caret-color: var(--accent);
+    padding: 25px; text-align: center; font-size: 1.4rem;
+    font-family: var(--mono); outline: none;
 }
-#answer-input::placeholder { color: #222; }
 
 #check-btn, #next-btn {
-    width: 100%; padding: 20px; border: none; cursor: pointer;
-    font-family: var(--mono); font-size: 0.9rem; letter-spacing: 0.3em;
+    width: 100%; padding: 25px; border: none; cursor: pointer;
+    font-family: var(--mono); font-size: 1rem; letter-spacing: 0.4em;
+    font-weight: bold;
 }
-#check-btn { background: var(--accent); color: #fff; }
-#check-btn:hover { background: #b30000; }
+#check-btn { background: var(--accent); color: #fff; transition: 0.3s; }
+#check-btn:hover { filter: brightness(1.2); }
 #next-btn  { background: transparent; color: var(--green); }
 
-/* — FOOTER (Geri Butonu) — */
-.footer { position: absolute; bottom: 5px; left: 10px; z-index: 11; }
-#back-btn {
-    background: none; border: none; color: #333;
-    cursor: pointer; font-family: var(--mono); font-size: 0.7rem;
+.footer {
+    height: 30px; background: var(--surface);
+    display: flex; align-items: center; padding-left: 15px;
 }
+#back-btn { background: none; border: none; color: #222; cursor: pointer; font-family: var(--mono); font-size: 0.65rem; }
 
-/* — MOBİL UYUM (Sadece telefonda çalışır) — */
+/* — MOBİL — */
 @media (max-width: 768px) {
-    .header { padding: 10px; }
-    #clock { font-size: 1rem; }
-    .puzzle-wrapper { padding-bottom: 120px; }
-    #answer-input { padding: 15px; font-size: 1rem; }
-    #check-btn, #next-btn { padding: 15px; font-size: 0.8rem; }
+    #answer-input { padding: 18px; font-size: 1.1rem; }
+    #check-btn, #next-btn { padding: 18px; }
 }
-
-/* Hata Paneli */
-.stats-table { width: 100%; max-height: 200px; overflow-y: auto; margin: 15px 0; border-top: 1px solid #222; }
-.stat-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #111; font-size: 0.8rem; }
-.time-val { color: var(--green); }
-.mistake-count { color: var(--accent); }
